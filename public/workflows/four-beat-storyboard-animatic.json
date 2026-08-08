@@ -1,0 +1,479 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "sd_xl_base_1.0.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "1. Select an SDXL checkpoint"
+    }
+  },
+  "2": {
+    "inputs": {
+      "image": "SB-Style_01.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "2. Style reference: uploaded storyboard"
+    }
+  },
+  "3": {
+    "inputs": {
+      "preset": "PLUS (high strength)",
+      "model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "IPAdapterUnifiedLoader",
+    "_meta": {
+      "title": "3. Load IPAdapter Plus"
+    }
+  },
+  "4": {
+    "inputs": {
+      "weight": 0,
+      "start_at": 0,
+      "end_at": 1,
+      "weight_type": "standard",
+      "model": [
+        "3",
+        0
+      ],
+      "ipadapter": [
+        "3",
+        1
+      ],
+      "image": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "IPAdapter",
+    "_meta": {
+      "title": "4. Apply storyboard style"
+    }
+  },
+  "5": {
+    "inputs": {
+      "text": "photorealistic, color, polished digital painting, finished comic art, multiple panels, storyboard sheet, storyboard grid, panel borders, captions, handwriting, speech bubbles, arrows, camera notes, logos, watermark, detailed facial realism, extra fingers, extra limbs, duplicate character, distorted boat, malformed architecture, cluttered composition, blurry, low quality",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Shared negative prompt"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "SINGLE 16:9 STORYBOARD FRAME. Extreme wide establishing shot of a silent flooded city at dawn. A lone young scavenger travels through submerged streets in a tiny homemade boat, surrounded by tilted buildings, broken signs, rooftops, and distant towers rising from the water. The character is very small in frame on the lower left, moving toward a mysterious rooftop greenhouse in the distance. Strong readable silhouettes, cinematic scale, atmospheric empty space. Rough hand-drawn animation production storyboard matching the reference image, loose black marker and graphite lines on white paper, monochrome, simplified geometric forms, sparse shading, visible construction strokes, unfinished preproduction sketch. No text, no arrows, no captions, no panel border.",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Shot 1 prompt"
+    }
+  },
+  "7": {
+    "inputs": {
+      "width": 1024,
+      "height": 576,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Shot 1 canvas"
+    }
+  },
+  "8": {
+    "inputs": {
+      "seed": 182736451,
+      "steps": 30,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "latent_image": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "Shot 1 render"
+    }
+  },
+  "9": {
+    "inputs": {
+      "samples": [
+        "8",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "Shot 1 decode"
+    }
+  },
+  "10": {
+    "inputs": {
+      "amount": 24,
+      "image": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "RepeatImageBatch",
+    "_meta": {
+      "title": "Shot 1: hold 2 sec at 12 fps"
+    }
+  },
+  "11": {
+    "inputs": {
+      "text": "SINGLE 16:9 STORYBOARD FRAME. Medium shot inside an abandoned rooftop greenhouse. The same young scavenger kneels beside a broken glass container and discovers one small living seed inside a cracked metal case. Dead plants, hanging wires, shattered glass, and overturned gardening equipment surround the character. The scavenger reaches carefully toward the seed, face filled with surprise and hope. Eye-level camera, clear staging, seed near the center of the composition. Rough hand-drawn animation production storyboard matching the reference image, loose black marker and graphite lines on white paper, monochrome, simplified geometric forms, minimal shading, visible construction strokes, unfinished preproduction sketch. No text, no arrows, no captions, no panel border.",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Shot 2 prompt"
+    }
+  },
+  "12": {
+    "inputs": {
+      "width": 1024,
+      "height": 576,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Shot 2 canvas"
+    }
+  },
+  "13": {
+    "inputs": {
+      "seed": 182736452,
+      "steps": 30,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "11",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "latent_image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "Shot 2 render"
+    }
+  },
+  "14": {
+    "inputs": {
+      "samples": [
+        "13",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "Shot 2 decode"
+    }
+  },
+  "15": {
+    "inputs": {
+      "amount": 24,
+      "image": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "RepeatImageBatch",
+    "_meta": {
+      "title": "Shot 2: hold 2 sec at 12 fps"
+    }
+  },
+  "16": {
+    "inputs": {
+      "text": "SINGLE 16:9 STORYBOARD FRAME. Dramatic close-medium shot on the rooftop during heavy wind and rain. The same young scavenger presses the seed into a small patch of soil inside a broken planter while protecting it with both hands. Torn fabric, loose papers, and greenhouse panels blow through the background. The character leans forward with determination, body forming a protective shape around the seed. Slight low-angle camera, bold silhouette, dynamic diagonal composition. Rough hand-drawn animation production storyboard matching the reference image, loose black marker and graphite lines on white paper, monochrome, energetic construction lines, sparse black hatching, unfinished animation preproduction sketch. No text, no arrows, no captions, no panel border.",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Shot 3 prompt"
+    }
+  },
+  "17": {
+    "inputs": {
+      "width": 1024,
+      "height": 576,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Shot 3 canvas"
+    }
+  },
+  "18": {
+    "inputs": {
+      "seed": 182736453,
+      "steps": 30,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "16",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "latent_image": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "Shot 3 render"
+    }
+  },
+  "19": {
+    "inputs": {
+      "samples": [
+        "18",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "Shot 3 decode"
+    }
+  },
+  "20": {
+    "inputs": {
+      "amount": 24,
+      "image": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "RepeatImageBatch",
+    "_meta": {
+      "title": "Shot 3: hold 2 sec at 12 fps"
+    }
+  },
+  "21": {
+    "inputs": {
+      "text": "SINGLE 16:9 STORYBOARD FRAME. Epic wide final shot of the flooded city as a giant flowering vine grows from the rooftop greenhouse and rises above the surrounding buildings. The same young scavenger stands beside the planter, looking upward in amazement. Huge leaves stretch across the skyline, birds circle the flower, and sunlight breaks through the clouds behind it. Strong heroic silhouette, clear scale difference, hopeful cinematic composition. Rough hand-drawn animation production storyboard matching the reference image, loose black marker and graphite lines on white paper, monochrome, simplified geometric forms, minimal shading, visible construction strokes, unfinished preproduction sketch. No text, no arrows, no captions, no panel border.",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Shot 4 prompt"
+    }
+  },
+  "22": {
+    "inputs": {
+      "width": 1024,
+      "height": 576,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Shot 4 canvas"
+    }
+  },
+  "23": {
+    "inputs": {
+      "seed": 182736454,
+      "steps": 30,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "21",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "latent_image": [
+        "22",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "Shot 4 render"
+    }
+  },
+  "24": {
+    "inputs": {
+      "samples": [
+        "23",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "Shot 4 decode"
+    }
+  },
+  "25": {
+    "inputs": {
+      "amount": 24,
+      "image": [
+        "24",
+        0
+      ]
+    },
+    "class_type": "RepeatImageBatch",
+    "_meta": {
+      "title": "Shot 4: hold 2 sec at 12 fps"
+    }
+  },
+  "26": {
+    "inputs": {
+      "image1": [
+        "10",
+        0
+      ],
+      "image2": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "ImageBatch",
+    "_meta": {
+      "title": "Shots 1 + 2"
+    }
+  },
+  "27": {
+    "inputs": {
+      "image1": [
+        "26",
+        0
+      ],
+      "image2": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "ImageBatch",
+    "_meta": {
+      "title": "+ Shot 3"
+    }
+  },
+  "28": {
+    "inputs": {
+      "image1": [
+        "27",
+        0
+      ],
+      "image2": [
+        "25",
+        0
+      ]
+    },
+    "class_type": "ImageBatch",
+    "_meta": {
+      "title": "+ Shot 4"
+    }
+  },
+  "29": {
+    "inputs": {
+      "fps": 12,
+      "images": [
+        "28",
+        0
+      ]
+    },
+    "class_type": "CreateVideo",
+    "_meta": {
+      "title": "Create 8-second animatic"
+    }
+  },
+  "30": {
+    "inputs": {
+      "filename_prefix": "video/the_last_seed_storyboard_animatic",
+      "format": "mp4",
+      "codec": "h264",
+      "video-preview": "",
+      "video": [
+        "29",
+        0
+      ]
+    },
+    "class_type": "SaveVideo",
+    "_meta": {
+      "title": "Save The Last Seed MP4"
+    }
+  }
+}

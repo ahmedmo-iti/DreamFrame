@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Local environment and machine-specific config
+.env
+.env.local
+.env.*.local
+dreamframe-workers.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

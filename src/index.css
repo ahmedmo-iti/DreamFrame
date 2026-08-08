@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #030305;
+    background-image: 
+      radial-gradient(ellipse 80% 60% at 50% -20%, rgba(99, 102, 241, 0.18), transparent 70%),
+      radial-gradient(ellipse 60% 50% at 85% 50%, rgba(139, 92, 246, 0.15), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 15% 80%, rgba(6, 182, 212, 0.12), transparent 65%),
+      radial-gradient(ellipse 50% 50% at 50% 120%, rgba(236, 72, 153, 0.08), transparent 50%),
+      radial-gradient(circle at 50% 50%, #07070a 0%, #020203 100%);
+    background-attachment: fixed;
+    color: #ffffff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+.blurry-color-fusion-bg {
+  background-color: #030305;
+  background-image: 
+    radial-gradient(ellipse 90% 65% at 50% -15%, rgba(99, 102, 241, 0.18), transparent 75%),
+    radial-gradient(ellipse 65% 55% at 90% 45%, rgba(139, 92, 246, 0.14), transparent 65%),
+    radial-gradient(ellipse 70% 60% at 10% 80%, rgba(6, 182, 212, 0.12), transparent 65%),
+    radial-gradient(ellipse 50% 50% at 50% 110%, rgba(236, 72, 153, 0.08), transparent 50%),
+    radial-gradient(circle at 50% 50%, #07070a 0%, #020203 100%);
+  background-attachment: fixed;
+}
+
+.font-grotesk, .chunky-grotesk {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+/* Custom quiet Frosted Glass container styling */
+.dreamframe-card, .glass-card {
+  background: rgba(8, 8, 8, 0.45);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+  border-radius: 28px;
+}
+
+.dreamframe-card-hover {
+  transition: all 0.25s ease;
+}
+
+.dreamframe-card-hover:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(14, 14, 18, 0.65);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
+  transform: translateY(-4px);
+}
+
+/* Ambient cool white bloom */
+.bloom, .cool-white-bloom {
+  position: absolute;
+  pointer-events: none;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.035) 0%, transparent 70%);
+  filter: blur(60px);
+  border-radius: 9999px;
+  z-index: 0;
+}
+
+.btn-primary {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+}
+
+.nav-item {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.2s ease;
+}
+
+.nav-item:hover {
+  color: #ffffff;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Keyboard and reduced-motion accessibility */
+:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.95);
+  outline-offset: 3px;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .dreamframe-card,
+  .glass-card {
+    border: 1px solid CanvasText;
+  }
+}

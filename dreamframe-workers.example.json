@@ -1,0 +1,22 @@
+{
+  "workers": [
+    {
+      "id": "main-pc",
+      "name": "Main PC",
+      "url": "http://127.0.0.1:8188",
+      "enabled": true
+    },
+    {
+      "id": "render-pc-02",
+      "name": "Render PC 02",
+      "url": "http://192.168.1.52:8188",
+      "enabled": true
+    },
+    {
+      "id": "render-pc-03",
+      "name": "Render PC 03",
+      "url": "http://192.168.1.53:8188",
+      "enabled": true
+    }
+  ]
+}
